@@ -1,6 +1,6 @@
 
 {
-    'name': "hfb_evoke_general_quality_module",
+    'name': "general_quality_module",
     'summary': """test""",
     'description': """test""",
     'author': "MakerONE",
