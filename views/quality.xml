@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+    <record id="general_quality_view_form" model="ir.ui.view">
+        <field name="name">general.quality.view.form</field>
+        <field name="model">general.quality</field>
+        <field name="arch" type="xml">
+            <form string="General Quality form">
+                <header>
+                    <field name="gq_status" widget="statusbar" options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object"
+                                class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button"
+                                   options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Record name"/>
+                        </h1>
+                    </div>
+                    <span class="o_form_label">Choose Type</span>
+                    <field name="type" string="Choose type" attrs="{'readonly':[('type', '!=', False)]}" force_save='1'/>
+                    <group string="Consumer Reclamation" attrs="{'invisible':[('type', '!=', 'cr')]}">
+                        <field name="cr_reclamation_date"/>
+                        <field name="cr_product"/>
+                        <field name="cr_bb_date"/>
+                        <field name="cr_batch"/>
+                        <field name="cr_pof"/>
+                        <field name="cr_compensation"/>
+                        <field name="cr_consumer_name"/>
+                        <field name="cr_consumer_address"/>
+                        <field name="cr_consumer_email"/>
+                        <field name="cr_producer_notified"/>
+                    </group>
+                    <group string="Product Batch Deviations" attrs="{'invisible':[('type', '!=', 'pbd')]}">
+                        <field name="pbr_date"/>
+                        <field name="pbr_product_safety_isue"/>
+                        <field name="pbr_other_issue"/>
+                        <field name="pbr_supplier"/>
+                        <field name="pbr_product"/>
+                        <field name="pbr_batch"/>
+                        <field name="pbr_problem"/>
+                        <field name="pbr_cause_investigation"/>
+                        <field name="pbr_conclusion"/>
+                        <field name="pbr_corrective_actions"/>
+                        <field name="pbr_signed"/>
+                    </group>
+                    <group string="Product Withdrawals" attrs="{'invisible':[('type', '!=', 'pw')]}">
+                        <field name="pw_date"/>
+                        <field name="pw_product"/>
+                        <field name="pw_batch"/>
+                        <field name="pw_reason"/>
+                        <field name="pw_nature_of_withdrawal"/>
+                        <field name="pw_chains_stores"/>
+                        <field name="pw_producer_informed"/>
+                        <field name="pw_producer_comments"/>
+                        <field name="pw_signed"/>
+                    </group>
+                    <group string="Authority Inspections" attrs="{'invisible':[('type', '!=', 'ai')]}">
+                        <field name="ai_date"/>
+                        <field name="ai_product"/>
+                        <field name="ai_issue"/>
+                        <field name="ai_authority"/>
+                        <field name="ai_nature_of_inspection"/>
+                        <field name="ai_notes"/>
+                        <field name="ai_corrective_actions"/>
+                        <field name="ai_signed"/>
+                    </group>
+                    <group string="FILES">
+                        <field name="images_ids" widget="many2many_binary"/>
+                        <field name="reports_ids" widget="many2many_binary"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id='general_quality_menu_action' model='ir.actions.act_window'>
+        <field name="name">General Quality menu</field>
+        <field name="res_model">general.quality</field>
+        <field name="view_mode">tree,form,kanban,pivot</field>
+    </record>
+
+    <menuitem name="General Quality" id="general_quality_base_menu" action="general_quality_menu_action" sequence="3"/>
+
+
+</odoo>
