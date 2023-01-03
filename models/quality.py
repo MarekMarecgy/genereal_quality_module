@@ -45,14 +45,14 @@ class GeneralQuality(models.Model):
 	@api.model
 	def create(self, vals):
 		res = super(GeneralQuality, self).create(vals)
-		for record in self:
+		for record in res:
 			for attachment in record.images_ids:
 				attachment.res_model = 'general.quality'
 				attachment.res_id = record.id
 				# wersja alternatywna
 				# attachment.sudo().write({'res_model':'res.partner', 'res_id': record.id})
 				# _logger.info("""\n\npartner.id = %s \n%s = %s""" % (record.id, attachment.res_model, attachment.res_id))
-		for record in self:
+		for record in res:
 			for attachment in record.reports_ids:
 				attachment.res_model = 'general.quality'
 				attachment.res_id = record.id
@@ -77,14 +77,14 @@ class GeneralQuality(models.Model):
 
 	def write(self, vals):
 		res = super(GeneralQuality, self).write(vals)
-		for record in self:
+		for record in res:
 			for attachment in record.images_ids:
 				attachment.res_model = 'general.quality'
 				attachment.res_id = record.id
 				# wersja alternatywna
 				# attachment.sudo().write({'res_model':'res.partner', 'res_id': record.id})
 				# _logger.info("""\n\npartner.id = %s \n%s = %s""" % (record.id, attachment.res_model, attachment.res_id))
-		for record in self:
+		for record in res:
 			for attachment in record.reports_ids:
 				attachment.res_model = 'general.quality'
 				attachment.res_id = record.id
